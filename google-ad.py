@@ -7,7 +7,7 @@ session = HTMLSession()
 
 ad_list = [] #empty list to store ad details
 
-df_keywords = pd.read_csv('top-keywords_test.csv', index_col =None, header=0 ) #getting top ad keywords out of a CSV
+df_keywords = pd.read_csv('top-keywords.csv', index_col=None, header=0) #getting top ad keywords out of a CSV
 
 for keyword in df_keywords.Keyword:
     #loop thru each of the top 20 most expensive adwords keywords
