@@ -45,16 +45,15 @@ Full script: [`google-ad.py`](google-ad.py) (40 lines).
 
 A v1-style selector scrape would require continuous selector maintenance and likely wouldn't hold up for more than days at a time.
 
-## v2 roadmap
+## v2 and the pivot
 
-Approach TBD. Candidates under evaluation:
+Initial v2 plan was a Playwright + stealth replacement of the 2019 Selenium scraper. Validation showed that's a losing battle in 2026: Google's anti-bot posture served a reCAPTCHA to headed real-Chrome + stealth on the second query, from a residential IP. Even with US-forced Apify datacenter proxies the `apify/google-search-scraper` returns zero paid ads on ~50% of commercial-intent queries. The SERP-scraping arms race is not a sensible place to invest portfolio time.
 
-- **Apify Google SERP actor** — outsource SERP rendering to a maintained actor. Needs validation that paid ads surface in the output.
-- **Paid SERP APIs** (SerpAPI, ScraperAPI, Oxylabs) — explicitly expose ad fields in structured JSON.
-- **Playwright + stealth** — modern replacement for Selenium; better at fingerprint evasion but selector fragility remains.
-- **Visual-first capture** — skip DOM extraction: take full-page screenshots and use a vision model to identify and caption the paid ad regions.
+**The follow-up repo instead works from public ad-transparency data:**
 
-Suggestions welcome — open an issue.
+→ **[nelsondooley/ad-library-analyzer](https://github.com/nelsondooley/ad-library-analyzer)** — Competitive ad intelligence from the Meta Ad Library (Facebook, Instagram, Threads, WhatsApp, Messenger). Fetch, normalize, analyze, visualize — with Apify's first-party scraper as the backend (pay-per-event, no rental fee). Ships with a 560-ad Shopify sample and four Plotly dashboards out of the box. A Google Ads Transparency Center backend is on that repo's roadmap.
+
+The pivot gives richer data than SERP scraping ever could (spend tiers, reach estimates, variant counts, platform mix, AI-generated media flag, compliance signals) without fighting Google's bot walls.
 
 ## Repo contents
 
